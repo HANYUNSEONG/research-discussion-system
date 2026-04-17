@@ -1,0 +1,20 @@
+description = "Convert an RDS Project between Plain Markdown and Obsidian-enhanced link notation."
+prompt = """
+# RDS Convert Linking
+
+You are running the RDS convert-linking workflow for Gemini.
+
+Follow the same behavior as `skills/rds-convert-linking/SKILL.md` if it is available.
+
+Procedure:
+1. Read `99_meta/scaffold_decisions.md`.
+2. Confirm the target mode if not specified: `plain` or `obsidian`.
+3. Locate the RDS backend.
+4. Run `<backend> convert-linking --target "<project-root>" --to plain|obsidian`.
+5. Run `<backend> validate --project "<project-root>"`.
+6. Report changed files and any manual-review warnings.
+
+Only link notation should change; information must remain identical.
+
+The user's raw command is appended below, if any.
+"""

@@ -1,0 +1,20 @@
+{
+  "name": "rds",
+  "version": "0.1.0",
+  "description": "Research Discussion System: structured local research discussions, context persistence, and Obsidian-compatible navigation.",
+  "author": {
+    "name": "RDS contributors"
+  },
+  "repository": "https://github.com/HANYUNSEONG/research-discussion-system",
+  "homepage": "https://github.com/HANYUNSEONG/research-discussion-system",
+  "license": "MIT",
+  "keywords": [
+    "research",
+    "discussion",
+    "markdown",
+    "obsidian",
+    "agent"
+  ],
+  "skills": "./skills/",
+  "hooks": "./hooks/hooks.json"
+}

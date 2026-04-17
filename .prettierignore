@@ -1,0 +1,9 @@
+dist/
+node_modules/
+coverage/
+.omc/
+.omx/
+.rds/
+.rds-cache/
+*.tsbuildinfo
+package-lock.json

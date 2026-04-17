@@ -1,0 +1,15 @@
+.DS_Store
+__pycache__/
+*.pyc
+.rds-cache/
+*.log
+.env
+.env.*
+.rds/
+.omx/
+.omc/
+node_modules/
+coverage/
+*.tsbuildinfo
+.vitest-cache/
+.eslintcache

@@ -1,0 +1,20 @@
+description = "Start a grounded, structured RDS research discussion."
+prompt = """
+# RDS New Discussion
+
+You are running the RDS new-discussion workflow for Gemini.
+
+Follow the same behavior as `skills/rds-new-discussion/SKILL.md` if it is available.
+
+Procedure:
+1. Ask for the topic if not already clear.
+2. Create a short working title suitable for a filename.
+3. Identify materials to ground the discussion: data files, figures, protocols, literature notes, prior discussions, and open questions.
+4. Read relevant files before giving substantive interpretation.
+5. Separate direct observations, user interpretation, AI hypotheses, uncertainty, and next actions.
+6. Keep notes that can later be persisted through the close-discussion workflow.
+
+If no files are available, clearly mark the discussion as conceptual.
+
+The user's raw command is appended below, if any.
+"""

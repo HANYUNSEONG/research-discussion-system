@@ -1,0 +1,20 @@
+{
+  "name": "research-discussion-system",
+  "interface": {
+    "displayName": "Research Discussion System"
+  },
+  "plugins": [
+    {
+      "name": "rds",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

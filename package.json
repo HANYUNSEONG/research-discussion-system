@@ -1,0 +1,72 @@
+{
+  "name": "research-discussion-system",
+  "version": "0.1.0",
+  "description": "Research Discussion System: structured local research discussions, context persistence, and Obsidian-compatible navigation.",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "bin": {
+    "rds": "dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint src",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "format:check": "prettier --check \"src/**/*.ts\"",
+    "doctor": "node dist/cli.js doctor --repo ."
+  },
+  "engines": {
+    "node": ">=20.11"
+  },
+  "files": [
+    "dist/",
+    "bin/",
+    "skills/",
+    "templates/",
+    "core/",
+    "adapters/",
+    "docs/",
+    "scaffolds/",
+    "hooks/",
+    ".claude-plugin/",
+    ".codex-plugin/",
+    ".agents/plugins/",
+    ".gemini/commands/",
+    "README.md",
+    "README.ko.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "research",
+    "discussion",
+    "markdown",
+    "obsidian",
+    "agent"
+  ],
+  "author": "RDS contributors",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HANYUNSEONG/research-discussion-system.git"
+  },
+  "homepage": "https://github.com/HANYUNSEONG/research-discussion-system",
+  "license": "MIT",
+  "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "@types/node": "^22.10.0",
+    "eslint": "^9.17.0",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.18.0",
+    "vitest": "^2.1.8"
+  }
+}

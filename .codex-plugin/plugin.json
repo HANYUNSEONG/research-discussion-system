@@ -1,0 +1,37 @@
+{
+  "name": "rds",
+  "version": "0.1.0",
+  "description": "Research Discussion System: structured local research discussions, context persistence, and Obsidian-compatible navigation.",
+  "author": {
+    "name": "RDS contributors"
+  },
+  "repository": "https://github.com/HANYUNSEONG/research-discussion-system",
+  "homepage": "https://github.com/HANYUNSEONG/research-discussion-system",
+  "license": "MIT",
+  "skills": "./skills/",
+  "keywords": [
+    "research",
+    "discussion",
+    "markdown",
+    "obsidian",
+    "agent"
+  ],
+  "interface": {
+    "displayName": "Research Discussion System",
+    "shortDescription": "Turn AI research discussions into durable Markdown records.",
+    "longDescription": "RDS sets up local research project folders with structured context, discussion logs, literature notes, metadata, and provider-neutral agent instructions.",
+    "developerName": "RDS contributors",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/HANYUNSEONG/research-discussion-system",
+    "defaultPrompt": [
+      "Use RDS to set up this research project.",
+      "Use RDS to resume the research context in this folder.",
+      "Use RDS to save this discussion as a durable research log."
+    ],
+    "brandColor": "#10A37F"
+  }
+}

@@ -1,0 +1,86 @@
+# Skills And Commands
+
+[English](skills.md)
+
+RDS workflow는 Claude와 Codex에서는 skill-first로 제공됩니다. Gemini는 공식 재사용 workflow 표면이 custom command이므로 equivalent custom command를 사용합니다.
+
+최종 사용자는 가능한 한 각 도구의 extension surface를 통해 workflow를 설치하는 것을 권장합니다.
+
+- Claude Cowork: plugin catalog 또는 custom plugin upload
+- Claude Code: Claude plugin marketplace
+- Codex: Codex plugin catalog 또는 `.agents/plugins/marketplace.json`을 포함한 marketplace
+- Gemini: `.gemini/commands/` 아래의 project/user custom command
+
+## Claude
+
+Claude plugin 사용자는 namespaced skill을 호출합니다.
+
+Claude 배포 파일:
+
+```text
+.claude-plugin/plugin.json
+.claude-plugin/marketplace.json
+```
+
+| Workflow | Invocation |
+|---|---|
+| Setup | `/rds:setup` |
+| Doctor | `/rds:doctor` |
+| Resume | `/rds:resume` |
+| New discussion | `/rds:new-discussion` |
+| Close discussion | `/rds:close-discussion` |
+| Convert linking | `/rds:convert-linking` |
+| Link check | `/rds:link-check` |
+
+`skills/setup`, `skills/resume` 같은 짧은 Claude skill은 canonical `skills/rds-*` workflow로 라우팅하는 alias입니다.
+
+## Codex
+
+Codex 사용자는 prefixed skill을 호출합니다.
+
+| Workflow | Invocation |
+|---|---|
+| Setup | `$rds-setup` |
+| Doctor | `$rds-doctor` |
+| Resume | `$rds-resume` |
+| New discussion | `$rds-new-discussion` |
+| Close discussion | `$rds-close-discussion` |
+| Convert linking | `$rds-convert-linking` |
+| Link check | `$rds-link-check` |
+
+생성된 RDS Project에는 `AGENTS.md`가 포함되어 Codex가 프로젝트별 규칙을 읽고 작업할 수 있습니다.
+
+Codex plugin 배포 파일은 다음과 같습니다.
+
+```text
+.codex-plugin/plugin.json
+.agents/plugins/marketplace.json
+```
+
+## Gemini
+
+Gemini 사용자는 equivalent custom command를 호출합니다.
+
+| Workflow | Invocation |
+|---|---|
+| Setup | `/rds:setup` |
+| Doctor | `/rds:doctor` |
+| Resume | `/rds:resume` |
+| New discussion | `/rds:new-discussion` |
+| Close discussion | `/rds:close-discussion` |
+| Convert linking | `/rds:convert-linking` |
+| Link check | `/rds:link-check` |
+
+Gemini command 정의는 `.gemini/commands/rds/` 아래에 있습니다.
+
+## Terminal
+
+터미널 wrapper는 maintainer와 테스트를 위한 보조 경로입니다.
+
+```bash
+npm install
+npm run build
+./bin/rds scaffold --target ./my-project --field "biology" --topic "project topic" --scaffold wet_lab
+./bin/rds validate --project ./my-project
+./bin/rds doctor --project ./my-project
+```

@@ -1,0 +1,14 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "If the current working folder appears to be an RDS Project, read 99_meta/scaffold_decisions.md and 99_meta/rds_agent_contract.md before starting substantive research discussion. Then read 00_context/project_overview.md, decisions_log.md, open_questions.md, evidence_register.md, assumptions.md, and 04_discussions/_index.md if they exist. Keep the restoration concise and do not claim memory from files you did not read."
+          }
+        ]
+      }
+    ]
+  }
+}

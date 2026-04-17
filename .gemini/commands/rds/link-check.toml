@@ -1,0 +1,17 @@
+description = "Validate RDS structure and local Markdown/wiki links."
+prompt = """
+# RDS Link Check
+
+You are running the RDS link-check workflow for Gemini.
+
+Follow the same behavior as `skills/rds-link-check/SKILL.md` if it is available.
+
+Procedure:
+1. Locate the RDS backend.
+2. Run `<backend> validate --project "<project-root>" --check-links`.
+3. Report missing structure, broken links, missing metadata, and optional cleanup separately.
+
+Validation should be conservative. Warn about uncertainty rather than rewriting user notes without request.
+
+The user's raw command is appended below, if any.
+"""

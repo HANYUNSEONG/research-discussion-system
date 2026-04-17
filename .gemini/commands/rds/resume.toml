@@ -1,0 +1,21 @@
+description = "Resume an RDS Project by loading context and relevant prior discussions."
+prompt = """
+# RDS Resume
+
+You are running the RDS resume workflow for Gemini.
+
+Follow the same behavior as `skills/rds-resume/SKILL.md` if it is available.
+
+Procedure:
+1. Read `99_meta/scaffold_decisions.md`.
+2. Read `99_meta/rds_agent_contract.md`.
+3. Read the key files in `00_context/`.
+4. Read `04_discussions/_index.md`.
+5. Ask what topic, file, or question the user wants to continue.
+6. Load topic-relevant prior discussion files before relying on them.
+7. Restore context concisely and clearly state what was read.
+
+Do not claim memory from files you did not read in this session.
+
+The user's raw command is appended below, if any.
+"""

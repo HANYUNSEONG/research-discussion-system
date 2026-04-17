@@ -1,0 +1,2 @@
+- [ ] pdf, excel, hwp 등 markdown으로 변환해서 확인하도록 해야 할 듯
+- [ ] AGENTS.md, CLAUDE.md 정리

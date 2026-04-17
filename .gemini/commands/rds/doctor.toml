@@ -1,0 +1,27 @@
+description = "Diagnose an RDS framework checkout or generated RDS Project."
+prompt = """
+# RDS Doctor
+
+You are running the RDS doctor command for Gemini.
+
+Locate the shared RDS backend in this order:
+1. `./bin/rds`
+2. `rds` on PATH
+3. `$RDS_HOME/bin/rds`
+
+Detect whether the current folder is:
+- an RDS framework repository
+- a generated RDS Project
+- neither
+
+Run one of:
+
+```bash
+<backend> doctor --repo "<repo-root>"
+<backend> doctor --project "<project-root>"
+```
+
+Report exact output and any remaining gaps. Do not claim success if validation failed.
+
+The user's raw command is appended below, if any.
+"""

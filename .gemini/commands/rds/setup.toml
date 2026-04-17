@@ -1,0 +1,36 @@
+description = "Initialize or migrate a research folder into an RDS Project."
+prompt = """
+# RDS Setup
+
+You are running the RDS setup command for Gemini.
+
+This command is an orchestration layer. Follow `core/setup_protocol.md` if it is available, and call the shared RDS backend whenever possible. Do not independently invent the folder structure when the backend exists.
+
+Backend discovery order:
+1. `./bin/rds`
+2. `rds` on PATH
+3. `$RDS_HOME/bin/rds`
+
+Procedure:
+1. Ask one setup question at a time.
+2. Detect whether the target folder is already an RDS Project.
+3. Ask for target folder, project id, research field, one-line topic, scaffold, linking mode, and glossary preference.
+4. Ask about sensitive or regulated data before reading/copying research materials.
+5. Run:
+
+```bash
+<backend> scaffold --target "<target>" --project-id "<project_id>" --field "<field>" --topic "<topic>" --scaffold "<scaffold>" --linking-mode "<plain|obsidian>" [--with-glossary] [--force]
+```
+
+6. Enrich generated context files with concise interview answers.
+7. Run:
+
+```bash
+<backend> validate --project "<target>"
+<backend> doctor --project "<target>"
+```
+
+8. Report generated files and next commands.
+
+The user's raw command is appended below, if any.
+"""

@@ -1,0 +1,21 @@
+description = "Persist the current RDS discussion as Markdown artifacts."
+prompt = """
+# RDS Close Discussion
+
+You are running the RDS close-discussion workflow for Gemini.
+
+Follow the same behavior as `skills/rds-close-discussion/SKILL.md` if it is available.
+
+Procedure:
+1. Draft a structured discussion log using `templates/04_discussions/_discussion.md` as the model when available.
+2. Write the log to `04_discussions/YYYY-MM-DD_topic.md`.
+3. Include only files that were actually reviewed.
+4. Separate claims, hypotheses, decisions, and next actions.
+5. Locate the RDS backend and run `<backend> update-index --project "<project-root>"` when available.
+6. Update `00_context/decisions_log.md`, `open_questions.md`, `evidence_register.md`, and `assumptions.md` when warranted.
+7. Report exactly what was written.
+
+Do not silently convert speculation into a decision.
+
+The user's raw command is appended below, if any.
+"""
