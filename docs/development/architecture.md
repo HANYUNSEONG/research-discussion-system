@@ -21,3 +21,13 @@ The shared backend is a Node.js command-line tool. Source lives in `src/` as Typ
 ## Design Decision
 
 Avoid the term `vault` in core docs unless specifically discussing Obsidian. RDS should remain broader than Obsidian while staying Obsidian-compatible.
+
+## 5. Ingestion Normalization Layer (Proposed)
+
+To support raw research artifacts (PDF, spreadsheets, HWP, etc.) while keeping the core provider-neutral, add a backend ingestion command that normalizes source files into Markdown derivatives plus metadata.
+
+- Keep original files immutable under project data folders.
+- Generate AI-readable Markdown in a derived path.
+- Persist conversion metadata (source mapping, checksums, converter version, failures) for reproducibility.
+- Expose the workflow through the shared Node backend (not adapter-specific scripts) so Codex/Claude/Gemini surfaces all call the same contract.
+
