@@ -17,10 +17,10 @@ RDS is not an Obsidian vault format and is not tied to one AI provider. The sour
 2. Open the research project folder you want to organize.
 3. Run the setup workflow.
 
-| Tool | Setup |
-|---|---|
+| Tool   | Setup        |
+| ------ | ------------ |
 | Claude | `/rds:setup` |
-| Codex | `$rds-setup` |
+| Codex  | `$rds-setup` |
 | Gemini | `/rds:setup` |
 
 After installation, the setup workflow asks about your research field, project topic, preferred linking mode, project type, current blockers, data formats, external tools, sensitive-data boundaries, glossary needs, and discussion style.
@@ -31,42 +31,90 @@ Based on those answers, it creates an RDS Project with context files, discussion
 
 RDS should be installed through the extension surface of the AI tool you use. The terminal commands in this repository are for maintainers, testers, and source installs.
 
-### Claude Cowork And Claude Code
+### Claude
 
-For non-technical users, use Claude Cowork in Claude Desktop:
+You can install RDS from either Claude Desktop or Claude Code.
 
-1. Open Claude Desktop and switch to Cowork.
-2. Open Customize, then Browse plugins.
-3. Install RDS from your plugin catalog. If your organization has not published RDS to a catalog yet, upload the RDS plugin file provided by your maintainer.
-4. Open the research folder you want to organize and run `/rds:setup`.
+#### Option A: Claude Desktop app
 
-RDS is already packaged as a Claude plugin in this repository:
+1. Open the Claude Desktop app and switch to the **Cowork** workspace.
+2. Go to **Customize** → **Browse plugins**.
+3. If `rds` is not visible, add this repository as a marketplace source in the plugin browser:
+   - `https://github.com/HANYUNSEONG/research-discussion-system`
+4. Install plugin ID `rds`.
+5. Start a task in your research folder and run `/rds:setup`.
 
-```text
-.claude-plugin/plugin.json        # Claude plugin manifest
-.claude-plugin/marketplace.json   # Claude marketplace metadata
-skills/                           # Shared workflow skills
-hooks/hooks.json                  # Claude plugin hooks
-```
+#### Option B: Claude Code (CLI/Desktop Code)
 
-Claude Code users can install RDS from a Claude plugin marketplace with `/plugin marketplace add ...` and `/plugin install rds@...`, or load it directly for development with `claude --plugin-dir <rds-repository>`.
+1. In Claude Code, add this repository as a marketplace source:
+
+   ```bash
+   /plugin marketplace add https://github.com/HANYUNSEONG/research-discussion-system
+   ```
+
+2. Install the plugin:
+
+   ```bash
+   /plugin install rds
+   ```
+
+3. Reload plugins:
+
+   ```bash
+   /reload-plugins
+   ```
+
+4. Open your research folder and run:
+
+   ```bash
+   /rds:setup
+   ```
+
+The plugin ID is `rds`.
 
 ### Codex
 
-For non-technical users, install RDS from Codex's plugin catalog or a Codex marketplace supplied by your team, then open the research folder and run `$rds-setup`.
+Install Codex first, then install plugin ID `rds`.
 
-This repository is Codex-plugin-ready:
+#### Option A: Codex desktop app (macOS/Windows)
 
-```text
-.codex-plugin/plugin.json          # Codex plugin manifest
-.agents/plugins/marketplace.json   # Local Codex marketplace entry
-skills/                            # RDS workflow skills
-src/                               # TypeScript backend source
-dist/cli.js                        # Built JavaScript backend
-bin/rds                            # Local wrapper used by the skills
-```
+1. Install the Codex app from the official download page.
+   - macOS: choose Apple Silicon or Intel build.
+   - Windows: install via Microsoft Store link from Codex docs.
+2. Open Codex and sign in (ChatGPT account recommended; API key is also supported).
+3. Open your research folder as a project.
+4. Open **Plugins** in Codex and add a source that points to this repository.
+   - URL source: `https://github.com/HANYUNSEONG/research-discussion-system`, or
+   - local source file: `.agents/plugins/marketplace.json`.
+5. Refresh the plugin list. Confirm that plugin ID `rds` appears.
+6. Install `rds` from the plugin list.
+7. Open your research folder and run `$rds-setup`.
 
-Maintainers can publish or share this repository as a Codex marketplace. Codex reads marketplace metadata from `.agents/plugins/marketplace.json`; the `rds` entry points at this repository as the plugin root. Once installed, generated RDS Projects include `AGENTS.md`, so later Codex sessions automatically receive project-specific RDS instructions.
+#### Option B: Codex CLI
+
+1. Install Node.js (current Codex docs use Node 22 in examples; use an active LTS/newer runtime).
+2. Install Codex CLI:
+
+   ```bash
+   npm i -g @openai/codex
+   ```
+
+3. Sign in:
+
+   ```bash
+   codex
+   ```
+
+   Then complete browser login with ChatGPT (default) or use API key authentication per Codex auth docs.
+
+4. In Codex CLI, open the plugin management flow and add this repository as a source.
+   - URL source: `https://github.com/HANYUNSEONG/research-discussion-system`, or
+   - local source file: `.agents/plugins/marketplace.json`.
+5. Refresh the plugin list. Confirm that plugin ID `rds` appears.
+6. Install `rds`.
+7. Move to your research project folder and run `$rds-setup`.
+
+On Windows, Codex CLI docs recommend WSL for a Linux-like environment (`wsl --install`, then install Node and Codex inside WSL).
 
 ### Gemini
 
@@ -102,16 +150,16 @@ Release checklist:
 2. Publish or distribute the Codex marketplace/plugin using `.agents/plugins/marketplace.json` and `.codex-plugin/plugin.json`.
 3. Distribute the Gemini command pack under `.gemini/commands/rds/` or include it in RDS-enabled project templates.
 
-Installation references: [Codex plugin build docs](https://developers.openai.com/codex/plugins/build), [Codex quickstart](https://developers.openai.com/codex/quickstart), [Claude Cowork plugins](https://support.claude.com/en/articles/13837440-use-plugins-in-claude-cowork), [Claude Code plugins](https://code.claude.com/docs/en/plugins), [Claude Code skills](https://code.claude.com/docs/en/skills), [Gemini CLI get started](https://google-gemini.github.io/gemini-cli/docs/get-started/), and [Gemini custom commands](https://google-gemini.github.io/gemini-cli/docs/cli/custom-commands.html).
+Installation references: [Codex app docs](https://developers.openai.com/codex/app), [Codex CLI docs](https://developers.openai.com/codex/cli), [Codex auth docs](https://developers.openai.com/codex/auth), [Codex Windows guide](https://developers.openai.com/codex/windows), [Codex plugin build docs](https://developers.openai.com/codex/plugins/build), [Codex quickstart](https://developers.openai.com/codex/quickstart), [Claude Cowork plugins](https://support.claude.com/en/articles/13837440-use-plugins-in-claude-cowork), [Claude Code plugins](https://code.claude.com/docs/en/plugins), [Claude Code skills](https://code.claude.com/docs/en/skills), [Gemini CLI get started](https://google-gemini.github.io/gemini-cli/docs/get-started/), and [Gemini custom commands](https://google-gemini.github.io/gemini-cli/docs/cli/custom-commands.html).
 
 ## Daily Use
 
-| Goal | Claude | Codex | Gemini |
-|---|---|---|---|
-| Resume context | `/rds:resume` | `$rds-resume` | `/rds:resume` |
-| Start a discussion | `/rds:new-discussion` | `$rds-new-discussion` | `/rds:new-discussion` |
-| Save a discussion | `/rds:close-discussion` | `$rds-close-discussion` | `/rds:close-discussion` |
-| Check project health | `/rds:doctor` | `$rds-doctor` | `/rds:doctor` |
+| Goal                 | Claude                  | Codex                   | Gemini                  |
+| -------------------- | ----------------------- | ----------------------- | ----------------------- |
+| Resume context       | `/rds:resume`           | `$rds-resume`           | `/rds:resume`           |
+| Start a discussion   | `/rds:new-discussion`   | `$rds-new-discussion`   | `/rds:new-discussion`   |
+| Save a discussion    | `/rds:close-discussion` | `$rds-close-discussion` | `/rds:close-discussion` |
+| Check project health | `/rds:doctor`           | `$rds-doctor`           | `/rds:doctor`           |
 
 Open the same folder in Obsidian if you want graph navigation, backlinks, wiki links, or Dataview-friendly metadata.
 
