@@ -8,7 +8,9 @@
 03_proofs/
 ```
 
-## Setup Questions
+## Discussion Cues
+
+These are not setup questions. Use them only when relevant during a discussion.
 
 - What problem or conjecture is central?
 - What definitions are fixed?

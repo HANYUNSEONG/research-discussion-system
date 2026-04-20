@@ -8,7 +8,9 @@
 03_analysis/
 ```
 
-## Setup Questions
+## Discussion Cues
+
+These are not setup questions. Use them only when relevant during a discussion.
 
 - What research question and population are central?
 - What study design is used?

@@ -8,13 +8,15 @@
 03_analysis/
 ```
 
-## Setup Questions
+## Discussion Cues
+
+These are not setup questions. Use them only when relevant during a discussion.
 
 - What model system is used?
 - What assays are central to the project?
 - What reagents, constructs, or cell products matter most?
 - What result type is currently hardest to interpret?
-- Which external tools are used? Examples: FlowJo, GraphPad Prism, ImageJ, Seurat.
+- Which analysis or visualization tools matter for the current discussion?
 
 ## Discussion Emphasis
 

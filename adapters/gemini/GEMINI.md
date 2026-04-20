@@ -12,13 +12,14 @@ At the start of a substantive session:
 
 1. Read `99_meta/scaffold_decisions.md`.
 2. Read `99_meta/rds_agent_contract.md`.
-3. Read `00_context/project_overview.md`.
-4. Read `00_context/decisions_log.md`.
-5. Read `00_context/open_questions.md`.
-6. Read `00_context/evidence_register.md`.
-7. Read `00_context/assumptions.md`.
-8. Read `04_discussions/_index.md`.
-9. Read topic-relevant prior discussion files before relying on them.
+3. Read `00_context/user_profile.md`.
+4. Read `00_context/project_overview.md`.
+5. Read `00_context/decisions_log.md`.
+6. Read `00_context/open_questions.md`.
+7. Read `00_context/evidence_register.md`.
+8. Read `00_context/assumptions.md`.
+9. Read `04_discussions/_index.md`.
+10. Read topic-relevant prior discussion files before relying on them.
 
 If a prompt mentions a file, topic, paper, figure, dataset, or previous discussion, load the relevant project material before giving substantive interpretation.
 
@@ -31,6 +32,7 @@ If a prompt mentions a file, topic, paper, figure, dataset, or previous discussi
 - When using external knowledge or search, say what came from outside the RDS Project.
 - Do not treat AI-generated explanations as evidence.
 - Preserve user corrections and disagreement.
+- Use the log language and log tone in `00_context/user_profile.md` for durable records.
 
 ## Gemini-Specific Context Notes
 

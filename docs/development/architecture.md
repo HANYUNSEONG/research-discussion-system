@@ -6,6 +6,8 @@ RDS has three layers.
 
 The RDS Project directory is the source of truth. It contains context, research materials, discussion logs, literature notes, and runtime metadata.
 
+`00_context/user_profile.md` is the single editable home for user-facing preferences and researcher context, including log language, log tone, and researcher stage. Do not duplicate those settings across project overview, runtime metadata, or discussion logs.
+
 ## 2. Agent Layer
 
 Agents read and write the RDS Project according to the agent contract. Claude, Codex, Gemini, and future tools are adapters.
@@ -38,4 +40,3 @@ To support raw research artifacts (PDF, spreadsheets, HWP, etc.) while keeping t
 - Generate AI-readable Markdown in a derived path.
 - Persist conversion metadata (source mapping, checksums, converter version, failures) for reproducibility.
 - Expose the workflow through the shared Node backend (not adapter-specific scripts) so Codex/Claude/Gemini surfaces all call the same contract.
-

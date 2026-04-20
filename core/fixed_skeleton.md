@@ -11,7 +11,7 @@ Every RDS Project must contain these folders:
 
 ## 00_context
 
-Durable project memory: identity, decisions, assumptions, evidence, open questions, and glossary.
+Durable project memory: user profile, project identity, decisions, assumptions, evidence, open questions, and glossary.
 
 ## 04_discussions
 

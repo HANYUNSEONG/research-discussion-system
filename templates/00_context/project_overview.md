@@ -21,11 +21,7 @@ status: active
 
 ## Central Hypothesis or Intended Claim
 
-_To be completed during setup._
-
-## Project Stage
-
-_To be completed during setup._
+_To be learned during discussions._
 
 ## Key Materials
 
@@ -36,7 +32,5 @@ _To be completed during setup._
 
 ## Discussion Preferences
 
-- Tone:
-- Hypothesis style:
-- Execution preference:
-- Speculation tolerance:
+- User preferences are recorded in `00_context/user_profile.md`.
+- Detailed collaboration preferences should be learned during discussions.

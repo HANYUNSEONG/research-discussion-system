@@ -4,28 +4,39 @@ RDS setup is a guided interview. The user answers a small number of questions, a
 
 ## What Setup Asks
 
-1. Target folder
-2. Project id
-3. Research field
-4. One-line project topic
-5. Project scaffold:
+Setup uses the current working folder by default and derives the project id from the topic unless the user explicitly provides one.
+
+Setup also detects the user's language from the setup conversation and uses it as the default language for future discussion logs.
+
+1. Research field
+2. One-line project topic
+3. Project scaffold:
    - `wet_lab`
    - `computational`
    - `social_science`
    - `clinical`
    - `theoretical`
    - `mixed`
-6. Linking mode:
+4. Linking mode:
    - `plain`
    - `obsidian`
-7. Glossary preference
-8. Current hypothesis or intended claim
-9. Current blocker
-10. Questions to answer in the next 1-2 months
-11. Data formats and existing folders
-12. External tools
-13. Sensitive-data boundaries
-14. Discussion style preference
+5. Glossary preference
+6. Log tone:
+   - `concise`
+   - `friendly`
+   - `rigorous`
+7. Researcher stage:
+   - `master`
+   - `phd`
+   - `integrated_ms_phd`
+   - `postdoc`
+   - `faculty_or_pi`
+   - `research_staff_or_industry`
+   - `other_or_skip`
+
+Setup does not ask for hypotheses, blockers, data formats, tools, detailed collaboration preferences, or clinical/sensitive-data screening. RDS learns project context during normal discussions and writes durable context when discussions are closed.
+
+User-facing settings from setup, including log language, log tone, and researcher stage, are stored in `00_context/user_profile.md` so the user can edit them in one place.
 
 ## What Setup Creates
 
@@ -57,9 +68,9 @@ It also creates `01_*`, `02_*`, and `03_*` folders based on the selected scaffol
 The setup skill is split into phases so the flow stays resumable and easier to maintain:
 
 1. Detect target folder and existing RDS state.
-2. Interview the user one question at a time.
+2. Ask the short setup questions one at a time.
 3. Scaffold files and folders.
-4. Enrich context files with concise answers.
+4. Enrich context files with concise setup identity.
 5. Validate and provide a welcome handoff.
 
 The phase files live under `skills/rds-setup/phases/`.

@@ -8,7 +8,9 @@
 03_experiments/
 ```
 
-## Setup Questions
+## Discussion Cues
+
+These are not setup questions. Use them only when relevant during a discussion.
 
 - What datasets are central?
 - What pipeline or model family is used?

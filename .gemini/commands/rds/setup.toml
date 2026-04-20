@@ -12,25 +12,26 @@ Backend discovery order:
 3. `$RDS_HOME/bin/rds`
 
 Procedure:
-1. Ask one setup question at a time.
+1. Use the current working folder as the target folder unless the user named another folder or the target is ambiguous.
 2. Detect whether the target folder is already an RDS Project.
-3. Ask for target folder, project id, research field, one-line topic, scaffold, linking mode, and glossary preference.
-4. Ask about sensitive or regulated data before reading/copying research materials.
-5. Run:
+3. Detect the user's language from the setup conversation and use it as the default language for future discussion logs.
+4. Ask only the short setup questions, one at a time: research field, one-line topic, scaffold, linking mode, glossary preference, log tone, and researcher stage.
+5. Do not ask for project id, project context, scaffold-specific context, or clinical/sensitive-data screening during setup.
+6. Run:
 
 ```bash
-<backend> scaffold --target "<target>" --project-id "<project_id>" --field "<field>" --topic "<topic>" --scaffold "<scaffold>" --linking-mode "<plain|obsidian>" [--with-glossary] [--force]
+<backend> scaffold --target "<target>" --field "<field>" --topic "<topic>" --scaffold "<scaffold>" --linking-mode "<plain|obsidian>" [--with-glossary] [--force]
 ```
 
-6. Enrich generated context files with concise interview answers.
-7. Run:
+7. Enrich generated context files with the setup identity only. Store user-facing settings only in `00_context/user_profile.md`.
+8. Run:
 
 ```bash
 <backend> validate --project "<target>"
 <backend> doctor --project "<target>"
 ```
 
-8. Report generated files and next commands.
+9. Report generated files and next commands.
 
 The user's raw command is appended below, if any.
 """

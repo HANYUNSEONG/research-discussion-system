@@ -18,17 +18,19 @@ The source of truth is the local RDS Project directory and its Markdown files. O
 
 1. Read `99_meta/scaffold_decisions.md`.
 2. Read this file.
-3. Read `00_context/project_overview.md`.
-4. Read `00_context/decisions_log.md`.
-5. Read `00_context/open_questions.md`.
-6. Read `00_context/evidence_register.md`.
-7. Read `00_context/assumptions.md`.
-8. Read `04_discussions/_index.md`.
-9. Read topic-relevant prior discussions before relying on them.
+3. Read `00_context/user_profile.md`.
+4. Read `00_context/project_overview.md`.
+5. Read `00_context/decisions_log.md`.
+6. Read `00_context/open_questions.md`.
+7. Read `00_context/evidence_register.md`.
+8. Read `00_context/assumptions.md`.
+9. Read `04_discussions/_index.md`.
+10. Read topic-relevant prior discussions before relying on them.
 
 ## During Discussion
 
 - Ground interpretations in files whenever possible.
+- Use the log language and log tone from `00_context/user_profile.md`. If no language is recorded, use the language the user is currently using.
 - Identify which files were actually read.
 - Separate observation, interpretation, hypothesis, decision, and next action.
 - Label speculation clearly.
@@ -48,6 +50,8 @@ These are defaults, not hard limits. Any agent may do any RDS task if it follows
 ## Closing a Discussion
 
 Before claiming completion, write a structured log in `04_discussions/`, update the discussion index, and update context files when new decisions, open questions, evidence, or assumptions emerged.
+
+Write discussion logs in the configured log language. Translate template section headings into that language when needed; do not keep English headings just because the template file is English.
 
 At minimum, the discussion log should record:
 

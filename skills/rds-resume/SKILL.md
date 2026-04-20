@@ -12,6 +12,7 @@ Use this skill at the beginning of a research session inside an existing RDS Pro
 1. Read `99_meta/scaffold_decisions.md`.
 2. Read `99_meta/rds_agent_contract.md` if present.
 3. Read these context files when present:
+   - `00_context/user_profile.md`
    - `00_context/project_overview.md`
    - `00_context/decisions_log.md`
    - `00_context/open_questions.md`

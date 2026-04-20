@@ -12,7 +12,9 @@ Use the mixed scaffold when the project has multiple distinct work modes, such a
 
 Use these default folders first. Add mode-specific folders after setup only when the project needs a clearer handoff between work modes.
 
-## Setup Questions
+## Discussion Cues
+
+These are not setup questions. Use them only when relevant during a discussion.
 
 - Which work modes are included?
 - Which mode is primary right now?

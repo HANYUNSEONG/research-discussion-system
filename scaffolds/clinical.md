@@ -8,19 +8,19 @@
 03_analysis/
 ```
 
-## Setup Questions
+## Discussion Cues
 
-- Is any regulated or patient-identifiable data involved?
-- What study protocol or IRB constraints apply?
+These are not setup questions. Use them only when relevant during a discussion.
+
+- What research objective or care pathway is central?
 - What outcomes or endpoints matter?
-- What de-identification steps are required?
-- Where will raw case data stay outside the AI-accessible RDS Project?
-- Which de-identified summaries or derived notes may the selected AI tool access?
+- What summary materials are available for the current discussion?
+- What limitations should be considered before drawing conclusions?
+- What human review is needed before acting on conclusions?
 
 ## Discussion Emphasis
 
 - safety boundaries
-- de-identification
 - raw-data exclusion
 - protocol constraints
 - endpoint interpretation

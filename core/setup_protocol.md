@@ -29,7 +29,7 @@ If no backend is available, stop and explain that RDS is installed as prompts on
 
 Before asking setup questions:
 
-1. Detect the target folder.
+1. Detect the target folder. Default to the current working folder unless the user named another folder or the target is ambiguous.
 2. Check whether it already looks like an RDS Project:
    - `99_meta/scaffold_decisions.md`
    - `99_meta/rds_agent_contract.md`
@@ -39,7 +39,7 @@ Before asking setup questions:
    - run doctor
    - force setup refresh
 4. Check whether the folder is non-empty. If non-empty, frame setup as migration/additive scaffolding.
-5. Ask about sensitive or regulated data before reading or copying research materials.
+5. Do not inspect raw research materials during setup. Setup should only inspect structural markers and directory emptiness.
 
 ## Phase 1: Interview
 
@@ -47,24 +47,28 @@ Ask one question at a time.
 
 Required answers:
 
-- target folder
-- project id
 - research field
 - one-line topic
 - scaffold: `wet_lab`, `computational`, `social_science`, `clinical`, `theoretical`, or `mixed`
 - linking mode: `plain` or `obsidian`
 - glossary preference
+- log tone: `concise`, `friendly`, or `rigorous`
+- researcher stage: `master`, `phd`, `integrated_ms_phd`, `postdoc`, `faculty_or_pi`, `research_staff_or_industry`, or `other_or_skip`
 
-Then ask the scaffold-specific questions in `scaffolds/<scaffold>.md`.
+Detect the default log language from the user's setup conversation. Ask for log language only if the detected language is ambiguous or the user wants a different language for written records.
 
-Recommended project context to collect after scaffolding:
+Do not ask for a project id unless the user explicitly wants to set one. The backend derives a project id from the topic when `--project-id` is omitted.
+
+Do not ask setup-time project context questions. RDS should learn these during normal discussions and close-discussion summaries:
 
 - current main hypothesis or intended claim
 - current blocker
 - key existing materials
 - data formats
 - external tools
-- discussion style preference
+
+Do not ask scaffold-specific context questions during setup.
+Do not ask clinical, patient, regulated-data, or de-identification screening questions during setup.
 
 ## Phase 2: Scaffold
 
@@ -73,11 +77,11 @@ Call the backend:
 ```bash
 <backend> scaffold \
   --target "<target>" \
-  --project-id "<project_id>" \
   --field "<field>" \
   --topic "<topic>" \
   --scaffold "<scaffold>" \
   --linking-mode "<plain|obsidian>" \
+  [--project-id "<project_id>"] \
   [--with-glossary] \
   [--force]
 ```
@@ -89,13 +93,14 @@ Use `--force` only for non-empty folders or explicit refresh/migration intent. N
 After the backend creates the base structure, update the generated context files with the user's interview answers:
 
 - `00_context/project_overview.md`
+- `00_context/user_profile.md`
 - `00_context/open_questions.md`
 - `00_context/decisions_log.md`
 - `00_context/evidence_register.md`
 - `00_context/assumptions.md`
 - `00_context/glossary.md` when enabled
 
-Keep these updates concise and durable. Do not dump the full interview transcript.
+Keep these updates concise and durable. Record project identity in `00_context/project_overview.md` and user settings in `00_context/user_profile.md`. User settings include detected log language, selected tone, and researcher stage. Do not duplicate user settings across multiple files. Do not dump the full interview transcript or invent hypotheses, blockers, evidence, data formats, or tools.
 
 ## Phase 4: Validate
 
@@ -117,7 +122,6 @@ End with a compact handoff:
 - linking mode
 - key generated files
 - how to resume in each tool
-- safety reminder if sensitive data was discussed
 
 Suggested wording:
 

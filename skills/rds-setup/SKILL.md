@@ -25,7 +25,8 @@ This skill is an orchestration layer. It must follow `core/setup_protocol.md` an
 ## Safety
 
 - Ask one question at a time.
-- Do not read or copy sensitive data before asking about data sensitivity.
+- Keep setup to the short onboarding questions in `phases/01-interview.md`.
+- Do not ask for raw research materials, sensitive data, clinical data, or regulated-data details during setup.
 - Use `--force` only when the user is intentionally setting up a non-empty folder or refreshing an existing RDS Project.
 - Do not overwrite raw research data.
 

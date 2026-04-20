@@ -3,6 +3,7 @@
 ## 00_context
 
 Keep this folder concise and durable. It should be readable at the start of every future session.
+Keep user-facing preferences in `user_profile.md` so the user can edit them in one place.
 
 ## 04_discussions
 

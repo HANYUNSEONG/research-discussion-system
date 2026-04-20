@@ -10,21 +10,25 @@ Use this skill to persist the current discussion as RDS artifacts.
 
 ## Workflow
 
-1. Draft a discussion log using `templates/04_discussions/_discussion.md` as the structure.
-2. Write the log to `04_discussions/YYYY-MM-DD_topic.md`.
-3. Include all source files that were actually read.
-4. Separate claims, hypotheses, decisions, and next actions.
-5. Update `04_discussions/_index.md` with the backend when available:
+1. Read `00_context/user_profile.md` when available to determine log language, log tone, and researcher stage.
+2. Draft a discussion log using `templates/04_discussions/_discussion.md` as the structure.
+   - Write headings and body in the configured log language.
+   - If no log language is configured, use the language the user used in the discussion.
+   - Apply the configured tone: `concise`, `friendly`, or `rigorous`.
+3. Write the log to `04_discussions/YYYY-MM-DD_topic.md`.
+4. Include all source files that were actually read.
+5. Separate claims, hypotheses, decisions, and next actions.
+6. Update `04_discussions/_index.md` with the backend when available:
 
 ```bash
 <backend> update-index --project "<project-root>"
 ```
 
-6. Append durable decisions to `00_context/decisions_log.md`.
-7. Append unresolved questions to `00_context/open_questions.md`.
-8. Add or update evidence in `00_context/evidence_register.md`.
-9. Add uncertain but active assumptions to `00_context/assumptions.md`.
-10. Tell the user what was written.
+7. Append durable decisions to `00_context/decisions_log.md`.
+8. Append unresolved questions to `00_context/open_questions.md`.
+9. Add or update evidence in `00_context/evidence_register.md`.
+10. Add uncertain but active assumptions to `00_context/assumptions.md`.
+11. Tell the user what was written.
 
 ## Guardrails
 

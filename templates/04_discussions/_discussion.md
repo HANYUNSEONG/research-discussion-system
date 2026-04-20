@@ -18,6 +18,8 @@ human_validation:
 
 # {{title}}
 
+Template note: when creating an actual discussion log, translate headings and body into the log language recorded in `00_context/user_profile.md`.
+
 ## Context Restoration
 
 What prior context was loaded for this discussion?

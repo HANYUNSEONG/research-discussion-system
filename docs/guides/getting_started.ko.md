@@ -48,7 +48,7 @@ npm run build
 - `wet_lab`: protocols, raw data, analysis
 - `computational`: pipelines, datasets, experiments
 - `social_science`: research design, data, analysis
-- `clinical`: protocol/IRB, de-identified case notes, analysis
+- `clinical`: clinical research materials, summaries, analysis
 - `theoretical`: problem statements, attempts, proofs
 - `mixed`: 여러 연구 모드가 섞인 프로젝트
 

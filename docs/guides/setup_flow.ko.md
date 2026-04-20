@@ -6,28 +6,39 @@ RDS setup은 짧은 인터뷰입니다. 사용자가 몇 가지 질문에 답하
 
 ## Setup에서 묻는 것
 
-1. 대상 폴더
-2. project id
-3. 연구 분야
-4. 한 줄 프로젝트 주제
-5. 프로젝트 scaffold
+Setup은 기본적으로 현재 작업 폴더를 대상 폴더로 사용합니다. project id는 사용자가 직접 지정하지 않으면 프로젝트 주제에서 자동 생성됩니다.
+
+또한 setup 대화에서 사용자의 언어를 감지해 이후 discussion log의 기본 작성 언어로 사용합니다.
+
+1. 연구 분야
+2. 한 줄 프로젝트 주제
+3. 프로젝트 scaffold
    - `wet_lab`
    - `computational`
    - `social_science`
    - `clinical`
    - `theoretical`
    - `mixed`
-6. linking mode
+4. linking mode
    - `plain`
    - `obsidian`
-7. glossary 필요 여부
-8. 현재 가설 또는 intended claim
-9. 현재 막힌 지점
-10. 1-2개월 안에 답하고 싶은 질문
-11. 데이터 형식과 기존 폴더
-12. 외부 도구
-13. 민감 데이터 경계
-14. 선호하는 discussion 스타일
+5. glossary 필요 여부
+6. log와 summary의 말투
+   - `concise`
+   - `friendly`
+   - `rigorous`
+7. 현재 연구자 과정
+   - `master`
+   - `phd`
+   - `integrated_ms_phd`
+   - `postdoc`
+   - `faculty_or_pi`
+   - `research_staff_or_industry`
+   - `other_or_skip`
+
+Setup은 가설, 막힌 지점, 데이터 형식, 외부 도구, 세부 협업 선호, 임상/민감 데이터 screening을 묻지 않습니다. 이런 맥락은 이후 일반 discussion 중 자연스럽게 파악하고, discussion을 닫을 때 durable context로 기록합니다.
+
+Setup에서 정한 사용자 설정, 즉 log 언어, 말투, 현재 연구자 과정은 `00_context/user_profile.md` 한 곳에 기록해 사용자가 쉽게 수정할 수 있게 합니다.
 
 ## Setup이 만드는 것
 
@@ -59,9 +70,9 @@ GEMINI.md
 Setup skill은 유지보수와 중단 후 재개가 쉽도록 phase로 나뉩니다.
 
 1. 대상 폴더와 기존 RDS 상태 감지
-2. 사용자에게 하나씩 질문
+2. 짧은 setup 질문을 하나씩 묻기
 3. 파일과 폴더 scaffold
-4. 답변을 context file에 간결하게 반영
+4. setup identity를 context file에 간결하게 반영
 5. 검증 후 다음 사용법 안내
 
 Phase 파일은 `skills/rds-setup/phases/` 아래에 있습니다.

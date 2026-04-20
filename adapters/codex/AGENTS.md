@@ -14,13 +14,14 @@ Before substantive research discussion, analysis, or project modification:
 
 1. Read `99_meta/scaffold_decisions.md`.
 2. Read `99_meta/rds_agent_contract.md`.
-3. Read `00_context/project_overview.md`.
-4. Read `00_context/decisions_log.md`.
-5. Read `00_context/open_questions.md`.
-6. Read `00_context/evidence_register.md`.
-7. Read `00_context/assumptions.md`.
-8. Read `04_discussions/_index.md`.
-9. Read topic-relevant prior discussion files before relying on them.
+3. Read `00_context/user_profile.md`.
+4. Read `00_context/project_overview.md`.
+5. Read `00_context/decisions_log.md`.
+6. Read `00_context/open_questions.md`.
+7. Read `00_context/evidence_register.md`.
+8. Read `00_context/assumptions.md`.
+9. Read `04_discussions/_index.md`.
+10. Read topic-relevant prior discussion files before relying on them.
 
 Do not claim continuity from memory unless the relevant file was read in the current session.
 
@@ -31,6 +32,7 @@ Do not claim continuity from memory unless the relevant file was read in the cur
 - Mark speculation clearly.
 - Do not treat AI-generated explanations as evidence.
 - Preserve explicit user disagreement, corrections, and uncertainty.
+- Use the log language and log tone in `00_context/user_profile.md` for durable records.
 - When the user asks for interpretation, prefer a compact, evidence-first answer before proposing broad possibilities.
 
 ## File and Analysis Rules

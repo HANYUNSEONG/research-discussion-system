@@ -4,7 +4,8 @@ Each scaffold defines:
 
 - purpose
 - folders to create
-- setup questions
-- suggested discussion sections
+- later discussion cues
+- suggested discussion emphasis
 
-Scaffolds may also name common data types or external tools when those details are useful for setup. Scaffolds customize RDS without changing the fixed core folders.
+Scaffold cues are not setup questions. Use them only when they become relevant during normal discussions.
+Scaffolds customize RDS without changing the fixed core folders.

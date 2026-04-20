@@ -41,6 +41,7 @@ export const REPO_REQUIRED = [
   "core/folder_instructions.md",
   "core/agent_adapter_contract.md",
   "scaffolds/wet_lab.md",
+  "templates/00_context/user_profile.md",
   "templates/00_context/project_overview.md",
   "templates/04_discussions/_discussion.md",
   "templates/04_discussions/_index.md",
@@ -78,6 +79,7 @@ export const REPO_REQUIRED = [
 ];
 
 export const PROJECT_REQUIRED = [
+  "00_context/user_profile.md",
   "00_context/project_overview.md",
   "00_context/decisions_log.md",
   "00_context/open_questions.md",

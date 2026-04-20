@@ -23,7 +23,6 @@ End with:
 - key generated folders
 - how to resume in Claude, Codex, and Gemini
 - reminder to close useful discussions so they become Markdown records
-- safety reminder if sensitive data was mentioned
 
 ## Rule
 

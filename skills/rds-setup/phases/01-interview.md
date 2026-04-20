@@ -1,42 +1,54 @@
 # Phase 1: Interview
 
-Purpose: collect the minimum information needed to scaffold a useful research project.
+Purpose: collect only the minimum information needed to scaffold a useful research project.
 
 Ask one question at a time.
 
 ## Required Questions
 
-1. What folder should become the RDS Project?
-2. What is the project id?
-3. What is the research field?
-4. What is the one-line project topic?
-5. Which scaffold should be used?
+Use the current working folder as the target folder unless the user already named another folder or the target is ambiguous.
+Detect the user's language from the setup conversation and record it as the default log language. Ask only if the language is ambiguous or the user requests a different log language.
+
+1. What is the research field?
+2. What is the one-line project topic?
+3. Which scaffold should be used?
    - `wet_lab`
    - `computational`
    - `social_science`
    - `clinical`
    - `theoretical`
    - `mixed`
-6. Which linking mode should be used?
+4. Which linking mode should be used?
    - `plain`
    - `obsidian`
-7. Should RDS create a glossary?
+5. Should RDS create a glossary?
+6. Which tone should RDS use for discussion logs and summaries?
+   - `concise`: brief, direct, minimal explanation
+   - `friendly`: approachable, explanatory, researcher-friendly
+   - `rigorous`: careful, skeptical, evidence-first
+7. What is the researcher's current stage?
+   - `master`
+   - `phd`
+   - `integrated_ms_phd`
+   - `postdoc`
+   - `faculty_or_pi`
+   - `research_staff_or_industry`
+   - `other_or_skip`
 
-## Context Questions
+## Do Not Ask During Setup
 
-Ask these after the required questions:
+Do not ask for project context during setup. Let RDS learn these during normal discussions:
 
 - What is the current hypothesis or intended claim?
 - What is the current blocker?
 - What questions should this project answer in the next 1-2 months?
 - What data formats or file types are common?
 - What external tools matter?
-- What discussion style does the user prefer?
 
-## Scaffold-Specific Questions
-
-Read `scaffolds/<scaffold>.md` and ask only the questions relevant to the selected scaffold.
+Do not ask scaffold-specific context questions during setup.
+Do not ask clinical, patient, regulated-data, or de-identification screening questions during setup.
+If a project id is needed, let the backend derive it from the topic unless the user explicitly provided one.
 
 ## Output
 
-Summarize the answers briefly before scaffolding. Do not dump the full interview transcript into context files.
+Summarize the setup answers briefly before scaffolding. Do not dump the full interview transcript into context files.
