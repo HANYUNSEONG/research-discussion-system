@@ -6,6 +6,7 @@ import { validateCommand } from "./commands/validate.js";
 import { doctorCommand } from "./commands/doctor.js";
 import { updateIndexCommand } from "./commands/update-index.js";
 import { convertLinkingCommand } from "./commands/convert-linking.js";
+import { codexCommand } from "./commands/codex.js";
 import { CliError, formatError } from "./lib/errors.js";
 export function usage() {
     return `RDS command wrapper
@@ -17,6 +18,7 @@ Usage:
   rds doctor [options]          Diagnose an RDS Project or framework repo
   rds update-index [options]    Rebuild 04_discussions/_index.md
   rds convert-linking [options] Convert links between plain and obsidian modes
+  rds codex <subcommand>        Install/check Codex local skill integration
   rds help                      Show this help
 
 Examples:
@@ -24,7 +26,8 @@ Examples:
   rds validate --project ./my-project
   rds doctor --project ./my-project
   rds update-index --project ./my-project
-  rds convert-linking --target ./my-project --to obsidian`;
+  rds convert-linking --target ./my-project --to obsidian
+  rds codex install`;
 }
 export function repoRootFromDist() {
     return path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -49,6 +52,8 @@ export function run(argv, cwd = process.cwd(), repoRoot = repoRootFromDist()) {
             return updateIndexCommand(rest, cwd);
         case "convert-linking":
             return convertLinkingCommand(rest, cwd);
+        case "codex":
+            return codexCommand(rest, repoRoot);
         case "help":
         case "-h":
         case "--help":

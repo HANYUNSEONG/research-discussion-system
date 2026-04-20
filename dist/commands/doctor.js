@@ -192,6 +192,13 @@ function repoChecks(root) {
         jsonManifestCheck(root, ".codex-plugin/plugin.json", "Codex plugin manifest", "Restore plugin manifest"),
         codexMarketplaceCheck(root),
         existsCheck(root, "TypeScript backend", ["package.json", "tsconfig.json", "src/cli.ts", "dist/cli.js"], "Run npm run build"),
+        existsCheck(root, "Codex installer assets", [
+            "src/commands/codex.ts",
+            "skills/rds-setup/SKILL.md",
+            "skills/rds-doctor/SKILL.md",
+            "core/setup_protocol.md",
+            "templates/99_meta/rds_version.md",
+        ], "Restore Codex installer source assets"),
         existsCheck(root, "Skill surfaces", [
             "skills/rds-setup/SKILL.md",
             "skills/rds-doctor/SKILL.md",

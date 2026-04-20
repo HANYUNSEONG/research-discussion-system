@@ -74,47 +74,33 @@ The plugin ID is `rds`.
 
 ### Codex
 
-Install Codex first, then install plugin ID `rds`.
+For Codex, use the command-based install flow below rather than plugin marketplace setup.
 
-#### Option A: Codex desktop app (macOS/Windows)
-
-1. Install the Codex app from the official download page.
-   - macOS: choose Apple Silicon or Intel build.
-   - Windows: install via Microsoft Store link from Codex docs.
-2. Open Codex and sign in (ChatGPT account recommended; API key is also supported).
-3. Open your research folder as a project.
-4. Open **Plugins** in Codex and add a source that points to this repository.
-   - URL source: `https://github.com/HANYUNSEONG/research-discussion-system`, or
-   - local source file: `.agents/plugins/marketplace.json`.
-5. Refresh the plugin list. Confirm that plugin ID `rds` appears.
-6. Install `rds` from the plugin list.
-7. Open your research folder and run `$rds-setup`.
-
-#### Option B: Codex CLI
-
-1. Install Node.js (current Codex docs use Node 22 in examples; use an active LTS/newer runtime).
-2. Install Codex CLI:
+1. Install Node.js 20 or newer.
+2. Install the RDS package globally (or use `npx`):
 
    ```bash
-   npm i -g @openai/codex
+   npm install -g research-discussion-system
    ```
 
-3. Sign in:
+3. Install the Codex skill integration:
 
    ```bash
-   codex
+   rds codex install
    ```
 
-   Then complete browser login with ChatGPT (default) or use API key authentication per Codex auth docs.
+4. Verify local integration (recommended):
 
-4. In Codex CLI, open the plugin management flow and add this repository as a source.
-   - URL source: `https://github.com/HANYUNSEONG/research-discussion-system`, or
-   - local source file: `.agents/plugins/marketplace.json`.
-5. Refresh the plugin list. Confirm that plugin ID `rds` appears.
-6. Install `rds`.
-7. Move to your research project folder and run `$rds-setup`.
+   ```bash
+   rds codex doctor
+   ```
 
-On Windows, Codex CLI docs recommend WSL for a Linux-like environment (`wsl --install`, then install Node and Codex inside WSL).
+5. Open Codex in your research folder and run `$rds-setup`.
+
+Notes:
+- Installed skill files are placed under your Codex home in `.agents/skills/rds-*`.
+- The installer creates a stable local backend wrapper so Codex can run RDS even when PATH inheritance differs by environment.
+- Legacy Codex plugin marketplace metadata remains in this repository for compatibility experiments, but the recommended path is `rds codex install`.
 
 ### Gemini
 
@@ -147,7 +133,7 @@ The packaged backend requires Node.js 20 or newer at runtime. TypeScript is only
 Release checklist:
 
 1. Publish or distribute the Claude plugin package using `.claude-plugin/plugin.json` and `.claude-plugin/marketplace.json`.
-2. Publish or distribute the Codex marketplace/plugin using `.agents/plugins/marketplace.json` and `.codex-plugin/plugin.json`.
+2. Publish or distribute the Codex installer flow (`rds codex install`) and keep legacy `.agents/plugins/marketplace.json` + `.codex-plugin/plugin.json` metadata aligned if you still test native marketplace behavior.
 3. Distribute the Gemini command pack under `.gemini/commands/rds/` or include it in RDS-enabled project templates.
 
 Installation references: [Codex app docs](https://developers.openai.com/codex/app), [Codex CLI docs](https://developers.openai.com/codex/cli), [Codex auth docs](https://developers.openai.com/codex/auth), [Codex Windows guide](https://developers.openai.com/codex/windows), [Codex plugin build docs](https://developers.openai.com/codex/plugins/build), [Codex quickstart](https://developers.openai.com/codex/quickstart), [Claude Cowork plugins](https://support.claude.com/en/articles/13837440-use-plugins-in-claude-cowork), [Claude Code plugins](https://code.claude.com/docs/en/plugins), [Claude Code skills](https://code.claude.com/docs/en/skills), [Gemini CLI get started](https://google-gemini.github.io/gemini-cli/docs/get-started/), and [Gemini custom commands](https://google-gemini.github.io/gemini-cli/docs/cli/custom-commands.html).

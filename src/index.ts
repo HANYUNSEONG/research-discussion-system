@@ -11,3 +11,5 @@ export {
 export { doctorCommand, runDoctor, detectMode, parseRuntimeConfig } from "./commands/doctor.js";
 export { updateIndexCommand } from "./commands/update-index.js";
 export { convertLinkingCommand, toObsidian, toPlain } from "./commands/convert-linking.js";
+
+export { codexCommand } from "./commands/codex.js";
