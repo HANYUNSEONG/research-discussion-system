@@ -10,6 +10,11 @@ export const SCAFFOLD_FOLDERS = {
     theoretical: ["01_problem_statements", "02_attempts", "03_proofs"],
     mixed: ["01_research_materials", "02_data", "03_analysis"],
 };
+export const ADAPTER_TEMPLATE_FILES = [
+    { sourceRel: "adapters/codex/AGENTS.md", projectRel: "AGENTS.md" },
+    { sourceRel: "adapters/gemini/GEMINI.md", projectRel: "GEMINI.md" },
+    { sourceRel: "adapters/claude-cowork/CLAUDE.md", projectRel: "CLAUDE.md" },
+];
 const SCAFFOLD_CHOICES = Object.keys(SCAFFOLD_FOLDERS);
 const LINKING_CHOICES = ["plain", "obsidian"];
 export function slugify(value) {
@@ -41,12 +46,9 @@ function copyTemplateTree(source, target, values, includeGlossary) {
     }
 }
 function copyAdapterTemplates(repoRoot, target) {
-    const mappings = [
-        [path.join(repoRoot, "adapters", "codex", "AGENTS.md"), path.join(target, "AGENTS.md")],
-        [path.join(repoRoot, "adapters", "gemini", "GEMINI.md"), path.join(target, "GEMINI.md")],
-        [path.join(repoRoot, "adapters", "claude-cowork", "CLAUDE.md"), path.join(target, "CLAUDE.md")],
-    ];
-    for (const [source, destination] of mappings) {
+    for (const mapping of ADAPTER_TEMPLATE_FILES) {
+        const source = path.join(repoRoot, mapping.sourceRel);
+        const destination = path.join(target, mapping.projectRel);
         if (exists(source) && !exists(destination)) {
             writeText(destination, readText(source));
         }

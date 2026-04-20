@@ -7,8 +7,24 @@ status: active
 # RDS Agent Contract
 
 This file is the canonical instruction set for any AI agent working in this RDS Project.
+In generated RDS Projects, this contract lives at `99_meta/rds_agent_contract.md`.
 
 Tool-specific instruction files such as `CLAUDE.md`, `AGENTS.md`, and `GEMINI.md` adapt this contract to a given agent. They must not contradict this file.
+
+## Shared Contract Invariants
+
+<!-- RDS:SHARED-CONTRACT:START -->
+- Source of truth is the local RDS Project directory and its Markdown files; Obsidian is optional and not the data model.
+- Load the required context files before substantive research discussion, analysis, or project modification.
+- Ground claims in files that were actually read and identify the files used.
+- Separate observations, interpretations, hypotheses, decisions, next actions, and open questions.
+- Label speculation clearly and do not treat AI-generated explanations as evidence.
+- Keep project evidence separate from outside knowledge, literature search, or model prior knowledge.
+- Use the log language and log tone from `00_context/user_profile.md` for durable records.
+- Preserve user corrections, disagreement, and uncertainty.
+- Persist useful discussions under `04_discussions/`, update `04_discussions/_index.md`, and update decisions, open questions, evidence, and assumptions when they change, without foregrounding RDS maintenance in ordinary replies.
+- Follow `99_meta/safety_and_data_policy.md` if sensitive or regulated data may be involved.
+<!-- RDS:SHARED-CONTRACT:END -->
 
 ## Source of Truth
 
@@ -49,7 +65,7 @@ These are defaults, not hard limits. Any agent may do any RDS task if it follows
 
 ## Closing a Discussion
 
-Before claiming completion, write a structured log in `04_discussions/`, update the discussion index, and update context files when new decisions, open questions, evidence, or assumptions emerged.
+At discussion close, update the relevant RDS artifacts when the discussion produced durable research context. Write a structured log in `04_discussions/`, update the discussion index, and update context files when new decisions, open questions, evidence, or assumptions emerged.
 
 Write discussion logs in the configured log language. Translate template section headings into that language when needed; do not keep English headings just because the template file is English.
 
@@ -65,6 +81,19 @@ At minimum, the discussion log should record:
 - next actions
 - open questions
 - files created or modified
+
+## User-Facing Closeout
+
+Do not foreground RDS maintenance in ordinary research replies. The final reply should focus on the research outcome, interpretation, decision, or next action.
+
+Mention written files only when:
+
+- the user explicitly asks what was recorded
+- a new artifact is the main deliverable
+- a write, indexing, or validation failure may affect continuity or trust
+- the session is about RDS maintenance, migration, validation, or debugging
+
+For ordinary research discussions, at most include one short sentence in the user's language, such as: "This discussion has been recorded."
 
 ## Provider Trace
 

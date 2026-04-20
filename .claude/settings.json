@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./secrets/**)",
+      "Read(./.rds/**)",
+      "Read(./.omx/**)",
+      "Read(./.omc/**)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "printf '%s\\n' 'RDS harness: this is the framework repository, not a generated RDS Project. Read CLAUDE.md for repo rules and run npm run check before claiming completion after behavior changes.'"
+          }
+        ]
+      }
+    ]
+  }
+}

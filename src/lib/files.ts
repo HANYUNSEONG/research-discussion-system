@@ -64,7 +64,10 @@ export function hasPathPart(filePath: string, part: string): boolean {
   return filePath.split(path.sep).includes(part);
 }
 
-export function walkFiles(root: string): string[] {
+export function walkFiles(
+  root: string,
+  shouldSkipDir: (dirPath: string) => boolean = () => false,
+): string[] {
   if (!exists(root)) {
     return [];
   }
@@ -74,7 +77,9 @@ export function walkFiles(root: string): string[] {
     for (const entry of fs.readdirSync(current, { withFileTypes: true })) {
       const fullPath = path.join(current, entry.name);
       if (entry.isDirectory()) {
-        visit(fullPath);
+        if (!shouldSkipDir(fullPath)) {
+          visit(fullPath);
+        }
       } else if (entry.isFile()) {
         files.push(fullPath);
       }

@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "printf '%s\\n' 'RDS harness: this is the framework repository. Load AGENTS.md, preserve adapter contract alignment, and run npm run check before claiming completion after behavior changes.'",
+            "statusMessage": "Loading RDS harness guidance",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}

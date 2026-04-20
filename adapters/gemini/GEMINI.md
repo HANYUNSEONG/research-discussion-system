@@ -6,6 +6,21 @@ This folder is an RDS Project. The source of truth is the local project director
 
 Gemini should be the broad-context and literature-aware partner: strong at long-context synthesis, cross-file review, research planning, and external context checks when the user authorizes them.
 
+## Shared Contract Invariants
+
+<!-- RDS:SHARED-CONTRACT:START -->
+- Source of truth is the local RDS Project directory and its Markdown files; Obsidian is optional and not the data model.
+- Load the required context files before substantive research discussion, analysis, or project modification.
+- Ground claims in files that were actually read and identify the files used.
+- Separate observations, interpretations, hypotheses, decisions, next actions, and open questions.
+- Label speculation clearly and do not treat AI-generated explanations as evidence.
+- Keep project evidence separate from outside knowledge, literature search, or model prior knowledge.
+- Use the log language and log tone from `00_context/user_profile.md` for durable records.
+- Preserve user corrections, disagreement, and uncertainty.
+- Persist useful discussions under `04_discussions/`, update `04_discussions/_index.md`, and update decisions, open questions, evidence, and assumptions when they change, without foregrounding RDS maintenance in ordinary replies.
+- Follow `99_meta/safety_and_data_policy.md` if sensitive or regulated data may be involved.
+<!-- RDS:SHARED-CONTRACT:END -->
+
 ## Required Context Loading
 
 At the start of a substantive session:
@@ -43,7 +58,7 @@ If a prompt mentions a file, topic, paper, figure, dataset, or previous discussi
 
 ## Persistence Rule
 
-A useful RDS discussion is incomplete until it becomes a Markdown artifact. At discussion close, write or update:
+A useful RDS discussion that produced durable research context should become a Markdown artifact. At discussion close, write or update:
 
 - `04_discussions/YYYY-MM-DD_topic.md`
 - `04_discussions/_index.md`
@@ -52,4 +67,6 @@ A useful RDS discussion is incomplete until it becomes a Markdown artifact. At d
 - `00_context/evidence_register.md` when claims were tied to materials
 - `00_context/assumptions.md` when unverified assumptions matter
 
-Run the RDS index or validation helper if available before reporting completion.
+Run the RDS index or validation helper if available before reporting RDS maintenance, migration, validation, or substantial file work complete.
+
+Keep ordinary closeouts focused on the research outcome, interpretation, decision, or next action. Do not list RDS files or validation details unless the user asks, the artifact is the deliverable, or a write/index/validation problem affects continuity. At most, add one short sentence in the user's language, such as: "This discussion has been recorded."

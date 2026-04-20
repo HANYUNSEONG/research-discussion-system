@@ -9,6 +9,6 @@ export declare function listDir(dirPath: string): string[];
 export declare function isNonEmptyDir(dirPath: string): boolean;
 export declare function toPosix(relativePath: string): string;
 export declare function hasPathPart(filePath: string, part: string): boolean;
-export declare function walkFiles(root: string): string[];
+export declare function walkFiles(root: string, shouldSkipDir?: (dirPath: string) => boolean): string[];
 export declare function localDate(): string;
 //# sourceMappingURL=files.d.ts.map

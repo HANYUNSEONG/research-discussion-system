@@ -1,6 +1,8 @@
 import * as path from "path";
 import { parseArgs, readFlag, readString } from "../lib/args.js";
+import { checkAdapterContractDrift, checkRootAgentInstructions, checkRuntimeHarnessConfig, } from "../lib/agent-harness.js";
 import { exists, isExecutable, readText, resolvePath } from "../lib/files.js";
+import { ADAPTER_TEMPLATE_FILES } from "./scaffold.js";
 import { PROJECT_REQUIRED, REPO_REQUIRED, runValidation } from "./validate.js";
 export function detectMode(root) {
     if (exists(path.join(root, ".claude-plugin", "plugin.json")) &&
@@ -20,6 +22,35 @@ function existsCheck(root, name, rels, fix = "") {
         detail: missing.length === 0 ? "ok" : `missing: ${missing.join(", ")}`,
         fix,
     };
+}
+function problemsCheck(name, problems, okDetail, fix) {
+    return {
+        name,
+        ok: problems.length === 0,
+        detail: problems.length === 0 ? okDetail : problems.join("; "),
+        fix,
+    };
+}
+function hookConfigCheck(root) {
+    return problemsCheck("Runtime harness config", checkRuntimeHarnessConfig(root), "Claude settings and Codex hooks present", "Restore .claude/settings.json and .codex/hooks.json");
+}
+function rootAgentInstructionsCheck(root) {
+    return problemsCheck("Root agent instructions", checkRootAgentInstructions(root), "root AGENTS.md and CLAUDE.md contain aligned harness guidance", "Restore required root AGENTS.md and CLAUDE.md instructions");
+}
+function adapterDriftCheck(root) {
+    return problemsCheck("Adapter contract drift", checkAdapterContractDrift(root), "shared RDS rules aligned", "Update the canonical contract and all adapter instruction files together");
+}
+function generatedAdapterFreshnessCheck() {
+    const problems = [];
+    for (const mapping of ADAPTER_TEMPLATE_FILES) {
+        if (!REPO_REQUIRED.includes(mapping.sourceRel)) {
+            problems.push(`repo validation does not require adapter source: ${mapping.sourceRel}`);
+        }
+        if (!PROJECT_REQUIRED.includes(mapping.projectRel)) {
+            problems.push(`project validation does not require generated adapter: ${mapping.projectRel}`);
+        }
+    }
+    return problemsCheck("Generated adapter freshness", problems, "scaffold adapter mappings are covered by validation", "Keep scaffold adapter mappings, repo validation, and project validation in sync");
 }
 export function parseRuntimeConfig(root) {
     const config = path.join(root, "99_meta", "scaffold_decisions.md");
@@ -187,6 +218,9 @@ function repoChecks(root) {
     return [
         nodeCheck(),
         backendCheck(root, "repo"),
+        existsCheck(root, "Repository agent instructions", ["AGENTS.md", "CLAUDE.md"], "Restore root AGENTS.md and CLAUDE.md"),
+        rootAgentInstructionsCheck(root),
+        hookConfigCheck(root),
         jsonManifestCheck(root, ".claude-plugin/plugin.json", "Claude plugin manifest", "Restore plugin manifest"),
         claudeMarketplaceCheck(root),
         jsonManifestCheck(root, ".codex-plugin/plugin.json", "Codex plugin manifest", "Restore plugin manifest"),
@@ -227,6 +261,8 @@ function repoChecks(root) {
             ".gemini/commands/rds/link-check.toml",
         ], "Restore Gemini command files"),
         existsCheck(root, "Agent adapters", ["adapters/claude-cowork/CLAUDE.md", "adapters/codex/AGENTS.md", "adapters/gemini/GEMINI.md"], "Restore adapter templates"),
+        adapterDriftCheck(root),
+        generatedAdapterFreshnessCheck(),
         existsCheck(root, "User guide docs", [
             "README.md",
             "README.ko.md",

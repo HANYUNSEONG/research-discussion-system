@@ -16,6 +16,7 @@
   },
   "scripts": {
     "build": "tsc",
+    "check": "npm run build && npm run lint && npm test && node dist/cli.js doctor --repo . --check-links",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
@@ -41,6 +42,10 @@
     ".codex-plugin/",
     ".agents/plugins/",
     ".gemini/commands/",
+    ".claude/settings.json",
+    ".codex/hooks.json",
+    "AGENTS.md",
+    "CLAUDE.md",
     "README.md",
     "README.ko.md",
     "CHANGELOG.md",

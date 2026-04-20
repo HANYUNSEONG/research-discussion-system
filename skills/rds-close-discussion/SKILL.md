@@ -28,7 +28,9 @@ Use this skill to persist the current discussion as RDS artifacts.
 8. Append unresolved questions to `00_context/open_questions.md`.
 9. Add or update evidence in `00_context/evidence_register.md`.
 10. Add uncertain but active assumptions to `00_context/assumptions.md`.
-11. Tell the user what was written.
+11. Keep the user-facing closeout focused on the research outcome, interpretation, decision, or next action.
+    - Mention written files only when the user asks what was recorded, a new artifact is the deliverable, a write/index/validation failure affects continuity or trust, or the session is about RDS maintenance.
+    - For ordinary research discussions, at most include one short sentence in the user's language, such as: "This discussion has been recorded."
 
 ## Guardrails
 

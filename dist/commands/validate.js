@@ -3,6 +3,8 @@ import { parseArgs, readFlag, readString } from "../lib/args.js";
 import { exists, hasPathPart, readText, resolvePath, toPosix, walkFiles } from "../lib/files.js";
 import { fail } from "../lib/errors.js";
 export const REPO_REQUIRED = [
+    "AGENTS.md",
+    "CLAUDE.md",
     "README.md",
     "README.ko.md",
     "package.json",
@@ -11,8 +13,10 @@ export const REPO_REQUIRED = [
     "src/cli.ts",
     "src/commands/codex.ts",
     "dist/cli.js",
+    ".claude/settings.json",
     ".claude-plugin/plugin.json",
     ".claude-plugin/marketplace.json",
+    ".codex/hooks.json",
     ".codex-plugin/plugin.json",
     ".agents/plugins/marketplace.json",
     "docs/guides/getting_started.md",
@@ -97,6 +101,20 @@ const LINK_RE = /\[[^\]]+\]\(([^)]+)\)/g;
 const WIKI_RE = /\[\[([^\]|#]+)(?:#[^\]|]+)?(?:\|[^\]]+)?\]\]/g;
 const FENCED_CODE_RE = /(^|\n)```[\s\S]*?(\n```|$)/g;
 const INLINE_CODE_RE = /`[^`\n]*`/g;
+const LINK_CHECK_IGNORED_PATH_PARTS = [
+    ".git",
+    "node_modules",
+    "dist",
+    "coverage",
+    ".rds",
+    ".omx",
+    ".omc",
+];
+function isInsideRoot(root, target) {
+    const relative = path.relative(root, target);
+    return (relative === "" ||
+        (relative !== ".." && !relative.startsWith(`..${path.sep}`) && !path.isAbsolute(relative)));
+}
 export function checkRequired(root, required) {
     const problems = [];
     for (const rel of required) {
@@ -108,8 +126,12 @@ export function checkRequired(root, required) {
 }
 export function checkLinks(root) {
     const problems = [];
-    for (const filePath of walkFiles(root)) {
-        if (hasPathPart(filePath, ".git") || !filePath.endsWith(".md")) {
+    const rootResolved = path.resolve(root);
+    const shouldSkipDir = (dirPath) => {
+        return LINK_CHECK_IGNORED_PATH_PARTS.some((part) => hasPathPart(dirPath, part));
+    };
+    for (const filePath of walkFiles(rootResolved, shouldSkipDir)) {
+        if (!filePath.endsWith(".md")) {
             continue;
         }
         const text = readText(filePath).replace(FENCED_CODE_RE, "\n").replace(INLINE_CODE_RE, "");
@@ -125,16 +147,28 @@ export function checkLinks(root) {
                 continue;
             }
             const target = path.resolve(path.dirname(filePath), href);
+            if (path.isAbsolute(href) || !isInsideRoot(rootResolved, target)) {
+                problems.push(`external local link in ${toPosix(path.relative(rootResolved, filePath))}: ${href}`);
+                continue;
+            }
             if (!exists(target)) {
-                problems.push(`broken markdown link in ${toPosix(path.relative(root, filePath))}: ${href}`);
+                problems.push(`broken markdown link in ${toPosix(path.relative(rootResolved, filePath))}: ${href}`);
             }
         }
         let wikiMatch;
         while ((wikiMatch = WIKI_RE.exec(text)) !== null) {
             const href = wikiMatch[1];
-            const candidates = [path.join(root, href), path.join(root, `${href}.md`)];
+            const candidates = [
+                path.resolve(rootResolved, href),
+                path.resolve(rootResolved, `${href}.md`),
+            ];
+            if (path.isAbsolute(href) ||
+                candidates.some((candidate) => !isInsideRoot(rootResolved, candidate))) {
+                problems.push(`external wiki link in ${toPosix(path.relative(rootResolved, filePath))}: ${href}`);
+                continue;
+            }
             if (!candidates.some((candidate) => exists(candidate))) {
-                problems.push(`unresolved wiki link in ${toPosix(path.relative(root, filePath))}: ${href}`);
+                problems.push(`unresolved wiki link in ${toPosix(path.relative(rootResolved, filePath))}: ${href}`);
             }
         }
     }

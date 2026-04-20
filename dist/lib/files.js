@@ -53,7 +53,7 @@ export function toPosix(relativePath) {
 export function hasPathPart(filePath, part) {
     return filePath.split(path.sep).includes(part);
 }
-export function walkFiles(root) {
+export function walkFiles(root, shouldSkipDir = () => false) {
     if (!exists(root)) {
         return [];
     }
@@ -62,7 +62,9 @@ export function walkFiles(root) {
         for (const entry of fs.readdirSync(current, { withFileTypes: true })) {
             const fullPath = path.join(current, entry.name);
             if (entry.isDirectory()) {
-                visit(fullPath);
+                if (!shouldSkipDir(fullPath)) {
+                    visit(fullPath);
+                }
             }
             else if (entry.isFile()) {
                 files.push(fullPath);
