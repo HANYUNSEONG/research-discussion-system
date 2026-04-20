@@ -22,7 +22,15 @@ The shared backend is a Node.js command-line tool. Source lives in `src/` as Typ
 
 Avoid the term `vault` in core docs unless specifically discussing Obsidian. RDS should remain broader than Obsidian while staying Obsidian-compatible.
 
-## 5. Ingestion Normalization Layer (Proposed)
+## 5. Codex Integration Layer
+
+RDS keeps Codex support installer-first: `rds codex install` deploys a local skill pack and stable backend wrapper under the user's Codex home. This avoids coupling the core model to Codex marketplace parser differences while preserving provider-neutral core workflows.
+
+- Core source of truth remains in `core/`, `templates/`, `src/`, and `adapters/`.
+- Codex receives generated local integration artifacts (skills + wrapper), not an alternate duplicated core model.
+- Claude/Codex/Gemini should still route to the same Node backend contract.
+
+## 6. Ingestion Normalization Layer (Proposed)
 
 To support raw research artifacts (PDF, spreadsheets, HWP, etc.) while keeping the core provider-neutral, add a backend ingestion command that normalizes source files into Markdown derivatives plus metadata.
 

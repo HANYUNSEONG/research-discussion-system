@@ -74,47 +74,33 @@ RDS는 Claude Desktop 또는 Claude Code에서 설치할 수 있습니다.
 
 ### Codex
 
-Codex는 먼저 설치/로그인한 뒤, 플러그인 ID `rds`를 설치하면 됩니다.
+Codex는 plugin marketplace 설치보다 아래 명령 기반 설치 절차를 권장합니다.
 
-#### 방법 A: Codex Desktop App (macOS/Windows)
-
-1. 공식 다운로드 페이지에서 Codex app을 설치합니다.
-   - macOS: Apple Silicon/Intel 빌드 중 본인 환경에 맞는 것을 선택합니다.
-   - Windows: Codex 문서에 있는 Microsoft Store 링크로 설치합니다.
-2. Codex를 실행하고 로그인합니다. (ChatGPT 계정 권장, API key 로그인도 가능)
-3. 연구 폴더를 프로젝트로 엽니다.
-4. Codex의 **Plugins** 화면에서 이 repository를 source로 추가합니다.
-   - URL source: `https://github.com/HANYUNSEONG/research-discussion-system`
-   - 또는 로컬 source 파일: `.agents/plugins/marketplace.json`
-5. 플러그인 목록을 새로고침하고, plugin ID `rds`가 보이는지 확인합니다.
-6. 목록에서 `rds`를 설치합니다.
-7. 연구 폴더를 열고 `$rds-setup`을 실행합니다.
-
-#### 방법 B: Codex CLI
-
-1. Node.js를 설치합니다. (Codex 공식 문서는 예시로 Node 22를 사용합니다. 활성 LTS 이상 권장)
-2. Codex CLI를 설치합니다.
+1. 먼저 Node.js 20 이상을 설치합니다.
+2. RDS 패키지를 전역 설치합니다 (`npx`도 가능).
 
    ```bash
-   npm i -g @openai/codex
+   npm install -g research-discussion-system
    ```
 
-3. 로그인합니다.
+3. Codex skill 연동을 설치합니다.
 
    ```bash
-   codex
+   rds codex install
    ```
 
-   브라우저에서 ChatGPT 로그인(기본 경로)을 완료하거나, Codex 인증 문서대로 API key 인증을 사용할 수 있습니다.
+4. 로컬 연동 상태를 점검합니다 (권장).
 
-4. Codex CLI의 plugin 관리 흐름에서 이 repository를 source로 추가합니다.
-   - URL source: `https://github.com/HANYUNSEONG/research-discussion-system`
-   - 또는 로컬 source 파일: `.agents/plugins/marketplace.json`
-5. 플러그인 목록을 새로고침하고, plugin ID `rds`가 보이는지 확인합니다.
-6. `rds`를 설치합니다.
-7. 연구 폴더로 이동해 `$rds-setup`을 실행합니다.
+   ```bash
+   rds codex doctor
+   ```
 
-Windows에서는 Codex CLI 공식 문서가 WSL 사용(`wsl --install` 후 WSL 내부에 Node/Codex 설치)을 권장합니다.
+5. 연구 폴더에서 Codex를 열고 `$rds-setup`을 실행합니다.
+
+참고:
+- 설치된 skill 파일은 Codex home 아래 `.agents/skills/rds-*`에 배치됩니다.
+- 설치 과정에서 안정적인 로컬 backend wrapper를 생성하므로, 환경별 PATH 상속 차이가 있어도 동작이 일관됩니다.
+- 이 저장소의 Codex plugin marketplace 메타데이터는 호환성 실험용으로 유지하지만, 기본 권장 경로는 `rds codex install`입니다.
 
 ### Gemini
 
@@ -147,7 +133,7 @@ rds doctor --repo "$RDS_HOME"
 Release checklist:
 
 1. `.claude-plugin/plugin.json`과 `.claude-plugin/marketplace.json`을 사용해 Claude plugin package를 publish하거나 배포합니다.
-2. `.agents/plugins/marketplace.json`과 `.codex-plugin/plugin.json`을 사용해 Codex marketplace/plugin을 publish하거나 배포합니다.
+2. Codex installer 흐름(`rds codex install`)을 배포하고, native marketplace를 계속 실험하는 경우에만 `.agents/plugins/marketplace.json` + `.codex-plugin/plugin.json` 메타데이터를 함께 유지합니다.
 3. `.gemini/commands/rds/`의 Gemini command pack을 배포하거나 RDS-enabled project template에 포함합니다.
 
 설치 참고 문서: [Codex app docs](https://developers.openai.com/codex/app), [Codex CLI docs](https://developers.openai.com/codex/cli), [Codex auth docs](https://developers.openai.com/codex/auth), [Codex Windows guide](https://developers.openai.com/codex/windows), [Codex plugin build docs](https://developers.openai.com/codex/plugins/build), [Codex quickstart](https://developers.openai.com/codex/quickstart), [Claude Cowork plugins](https://support.claude.com/en/articles/13837440-use-plugins-in-claude-cowork), [Claude Code plugins](https://code.claude.com/docs/en/plugins), [Claude Code skills](https://code.claude.com/docs/en/skills), [Gemini CLI get started](https://google-gemini.github.io/gemini-cli/docs/get-started/), [Gemini custom commands](https://google-gemini.github.io/gemini-cli/docs/cli/custom-commands.html).

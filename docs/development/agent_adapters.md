@@ -77,14 +77,13 @@ Use Codex for:
 
 Codex follows `AGENTS.md`-style repository instructions. RDS uses this file to tell Codex how to work inside research projects without turning uncertain AI reasoning into evidence.
 
-Distribution surface:
+Primary distribution surface:
 
 ```text
-.codex-plugin/plugin.json
-.agents/plugins/marketplace.json
+rds codex install
 ```
 
-The Codex plugin manifest exposes the RDS skills as a plugin. The local marketplace file makes the repository installable through Codex's plugin marketplace/catalog flow when the repository is used as a marketplace source.
+Codex support is installer-first. `rds codex install` installs local Codex skill entries plus a stable local backend wrapper so `$rds-*` skills can execute consistently across Codex app/CLI environments. Legacy `.codex-plugin/plugin.json` and `.agents/plugins/marketplace.json` metadata remain for compatibility experiments, but are not the default install path.
 
 Skill surface:
 

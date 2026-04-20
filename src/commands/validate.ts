@@ -10,6 +10,7 @@ export const REPO_REQUIRED = [
   "tsconfig.json",
   "bin/rds",
   "src/cli.ts",
+  "src/commands/codex.ts",
   "dist/cli.js",
   ".claude-plugin/plugin.json",
   ".claude-plugin/marketplace.json",

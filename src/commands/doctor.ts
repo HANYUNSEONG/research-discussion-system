@@ -231,6 +231,18 @@ function repoChecks(root: string): Check[] {
     ),
     existsCheck(
       root,
+      "Codex installer assets",
+      [
+        "src/commands/codex.ts",
+        "skills/rds-setup/SKILL.md",
+        "skills/rds-doctor/SKILL.md",
+        "core/setup_protocol.md",
+        "templates/99_meta/rds_version.md",
+      ],
+      "Restore Codex installer source assets",
+    ),
+    existsCheck(
+      root,
       "Skill surfaces",
       [
         "skills/rds-setup/SKILL.md",
