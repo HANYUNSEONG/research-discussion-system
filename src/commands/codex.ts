@@ -372,6 +372,22 @@ function codexDoctor(home: string, smokeTest: boolean): number {
       } finally {
         fs.rmSync(tmpRoot, { recursive: true, force: true });
       }
+
+      if (wrapperIsUsable(manifest.wrapperPath, true)) {
+        const wrapperResult = spawnSync(manifest.wrapperPath, ["help"], {
+          encoding: "utf8",
+          shell: IS_WINDOWS,
+        });
+        const ok = wrapperResult.status === 0 && wrapperResult.error == null;
+        const failureDetail = wrapperResult.error
+          ? String(wrapperResult.error)
+          : `status=${wrapperResult.status ?? "null"} stderr=${(wrapperResult.stderr ?? "").trim()}`;
+        checks.push({
+          name: "Wrapper invocation",
+          ok,
+          detail: ok ? manifest.wrapperPath : `${manifest.wrapperPath} (${failureDetail})`,
+        });
+      }
     }
   }
 

@@ -6,7 +6,7 @@ For end users, install these workflows through the tool's extension surface when
 
 - Claude Cowork: plugin catalog or custom plugin upload.
 - Claude Code: Claude plugin marketplace.
-- Codex: Codex plugin catalog or a marketplace that includes `.agents/plugins/marketplace.json`.
+- Codex: command-based install via `rds codex install` (recommended). Legacy plugin marketplace metadata under `.codex-plugin/` and `.agents/plugins/marketplace.json` is kept for compatibility experiments only.
 - Gemini: project or user custom commands under `.gemini/commands/`.
 
 ## Claude
@@ -48,7 +48,17 @@ Codex users invoke the canonical prefixed skills:
 
 Generated RDS Projects include `AGENTS.md`, so Codex can load project-specific rules before working.
 
-The Codex plugin distribution files are:
+End users install RDS for Codex with:
+
+```bash
+npm install -g research-discussion-system
+rds codex install
+rds codex doctor
+```
+
+This places skills under `~/.agents/skills/rds-*` (Codex's canonical user-skills path) and writes a stable backend wrapper under `~/.rds/bin/`. Windows 10/11 is supported natively (PowerShell, cmd); WSL users should run the install inside the WSL environment separately.
+
+Legacy Codex plugin marketplace metadata is retained for compatibility experiments only:
 
 ```text
 .codex-plugin/plugin.json
