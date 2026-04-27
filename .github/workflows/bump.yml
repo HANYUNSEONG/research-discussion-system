@@ -1,0 +1,133 @@
+name: Bump version
+
+on:
+  workflow_dispatch:
+    inputs:
+      bump_type:
+        description: 'Version bump type'
+        required: true
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+        default: patch
+
+concurrency:
+  group: bump-${{ github.workflow }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  bump:
+    name: Bump and create draft release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22.x'
+          cache: npm
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Capture previous version
+        id: prev
+        run: |
+          PREV_VERSION="$(node -p "require('./package.json').version")"
+          echo "version=$PREV_VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag=v$PREV_VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Bump npm version
+        id: bump
+        run: |
+          NEW_TAG="$(npm version ${{ inputs.bump_type }} --no-git-tag-version)"
+          NEW_VERSION="${NEW_TAG#v}"
+          echo "version=$NEW_VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag=v$NEW_VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Sync .codex-plugin/plugin.json version
+        env:
+          NEW_VERSION: ${{ steps.bump.outputs.version }}
+        run: |
+          node -e "
+            const fs = require('fs');
+            const path = '.codex-plugin/plugin.json';
+            const json = JSON.parse(fs.readFileSync(path, 'utf8'));
+            json.version = process.env.NEW_VERSION;
+            fs.writeFileSync(path, JSON.stringify(json, null, 2) + '\n');
+          "
+
+      - name: Verify
+        run: npm run check
+
+      - name: Commit and tag
+        env:
+          NEW_VERSION: ${{ steps.bump.outputs.version }}
+          NEW_TAG: ${{ steps.bump.outputs.tag }}
+        run: |
+          git add package.json package-lock.json .codex-plugin/plugin.json
+          git commit -m "$NEW_VERSION"
+          git tag -a "$NEW_TAG" -m "$NEW_VERSION"
+          git push --follow-tags
+
+      - name: Generate release notes from commit log
+        id: notes
+        env:
+          PREV_TAG: ${{ steps.prev.outputs.tag }}
+          NEW_TAG: ${{ steps.bump.outputs.tag }}
+          REPO: ${{ github.repository }}
+        run: |
+          NOTES_FILE="$(mktemp)"
+          {
+            echo "## Changes"
+            echo
+            COMMITS="$(git log "$PREV_TAG..$NEW_TAG^" --pretty=format:'- %s (%h)' --no-merges)"
+            if [ -z "$COMMITS" ]; then
+              echo "_No commits between $PREV_TAG and $NEW_TAG._"
+            else
+              echo "$COMMITS"
+            fi
+            echo
+            echo
+            echo "**Full Changelog**: https://github.com/$REPO/compare/$PREV_TAG...$NEW_TAG"
+          } > "$NOTES_FILE"
+          echo "file=$NOTES_FILE" >> "$GITHUB_OUTPUT"
+
+      - name: Create draft release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NEW_VERSION: ${{ steps.bump.outputs.version }}
+          NEW_TAG: ${{ steps.bump.outputs.tag }}
+          NOTES_FILE: ${{ steps.notes.outputs.file }}
+        run: |
+          gh release create "$NEW_TAG" \
+            --draft \
+            --title "$NEW_VERSION" \
+            --notes-file "$NOTES_FILE"
+
+      - name: Summary
+        env:
+          NEW_VERSION: ${{ steps.bump.outputs.version }}
+          NEW_TAG: ${{ steps.bump.outputs.tag }}
+          REPO: ${{ github.repository }}
+        run: |
+          {
+            echo "### Bumped to $NEW_VERSION"
+            echo
+            echo "- Commit and tag \`$NEW_TAG\` pushed to \`main\`."
+            echo "- Draft release created. Review and publish at:"
+            echo "  https://github.com/$REPO/releases"
+            echo "- Publishing the draft will trigger \`publish.yml\` (npm publish via OIDC)."
+          } >> "$GITHUB_STEP_SUMMARY"
