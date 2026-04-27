@@ -240,15 +240,20 @@ describe("rds commands", () => {
     withTempProject((dir, _project) => {
       const home = path.join(dir, "codex-home");
       expect(codexCommand(["install", "--home", home], repoRoot)).toBe(0);
-      expect(fs.existsSync(path.join(home, ".agents", "skills", "rds-setup", "SKILL.md"))).toBe(
-        true,
-      );
+      const skillFile = path.join(home, ".agents", "skills", "rds-setup", "SKILL.md");
+      expect(fs.existsSync(skillFile)).toBe(true);
       expect(fs.existsSync(path.join(home, ".rds", "bin", "rds"))).toBe(true);
+      expect(fs.existsSync(path.join(home, ".rds", "bin", "rds.cmd"))).toBe(true);
+
+      const skillContent = fs.readFileSync(skillFile, "utf8");
+      expect(skillContent).toContain("rds.cmd");
+      expect(skillContent).toContain(path.join(home, ".rds", "bin", "rds"));
+
       expect(codexCommand(["doctor", "--home", home], repoRoot)).toBe(0);
       expect(codexCommand(["uninstall", "--home", home], repoRoot)).toBe(0);
-      expect(fs.existsSync(path.join(home, ".agents", "skills", "rds-setup", "SKILL.md"))).toBe(
-        false,
-      );
+      expect(fs.existsSync(skillFile)).toBe(false);
+      expect(fs.existsSync(path.join(home, ".rds", "bin", "rds"))).toBe(false);
+      expect(fs.existsSync(path.join(home, ".rds", "bin", "rds.cmd"))).toBe(false);
     });
   });
 

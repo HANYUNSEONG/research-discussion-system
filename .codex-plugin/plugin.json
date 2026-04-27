@@ -1,6 +1,6 @@
 {
   "name": "rds",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Research Discussion System: structured local research discussions, context persistence, and Obsidian-compatible navigation.",
   "author": {
     "name": "RDS contributors"

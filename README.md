@@ -98,8 +98,9 @@ For Codex, use the command-based install flow below rather than plugin marketpla
 5. Open Codex in your research folder and run `$rds-setup`.
 
 Notes:
-- Installed skill files are placed under your Codex home in `.agents/skills/rds-*`.
+- Installed skill files are placed under `~/.agents/skills/rds-*` — Codex's canonical user-skills path.
 - The installer creates a stable local backend wrapper so Codex can run RDS even when PATH inheritance differs by environment.
+- Windows 10/11 is supported. Install Codex via `winget install Codex -s msstore`, then run `rds codex install` from PowerShell. The installer writes both `rds.cmd` (PowerShell/cmd) and `rds` (Git Bash/WSL) wrappers under `%USERPROFILE%\.rds\bin\`, and skills land at `%USERPROFILE%\.agents\skills\`.
 - Legacy Codex plugin marketplace metadata remains in this repository for compatibility experiments, but the recommended path is `rds codex install`.
 
 ### Gemini
