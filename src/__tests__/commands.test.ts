@@ -246,8 +246,17 @@ describe("rds commands", () => {
       expect(fs.existsSync(path.join(home, ".rds", "bin", "rds.cmd"))).toBe(true);
 
       const skillContent = fs.readFileSync(skillFile, "utf8");
-      expect(skillContent).toContain("rds.cmd");
-      expect(skillContent).toContain(path.join(home, ".rds", "bin", "rds"));
+      const expectedPrimary =
+        process.platform === "win32"
+          ? path.join(home, ".rds", "bin", "rds.cmd")
+          : path.join(home, ".rds", "bin", "rds");
+      expect(skillContent).toContain(expectedPrimary);
+      if (process.platform === "win32") {
+        expect(skillContent).toContain("WSL");
+      } else {
+        expect(skillContent).toContain("native Windows");
+        expect(skillContent).not.toContain("WSL");
+      }
 
       expect(codexCommand(["doctor", "--home", home], repoRoot)).toBe(0);
       expect(codexCommand(["uninstall", "--home", home], repoRoot)).toBe(0);

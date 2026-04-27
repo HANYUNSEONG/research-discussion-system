@@ -141,17 +141,23 @@ exec node ${shellSingleQuote(cliPath)} "$@"
   return written;
 }
 
+function wrapperGuidance(paths: WrapperPaths): string {
+  if (IS_WINDOWS) {
+    const lines = ["- Always use this backend wrapper for RDS actions. Pick the one matching the host shell:"];
+    if (paths.windows) lines.push(`  - Windows PowerShell / cmd: \`${paths.windows}\``);
+    if (paths.posix) lines.push(`  - Git Bash on Windows: \`${paths.posix}\``);
+    lines.push("  - WSL: do not reuse this Windows install; run `rds codex install` inside WSL separately.");
+    return lines.join("\n");
+  }
+  return `- Always use this backend wrapper for RDS actions: \`${paths.posix ?? paths.primary}\`.
+- If you switch to native Windows, run \`rds codex install\` from Windows separately rather than reusing this install.`;
+}
+
 function generateSkill(
   skillName: string,
   paths: WrapperPaths,
   supportRoot: string,
 ): string {
-  const wrapperGuidance = paths.posix && paths.windows
-    ? `- Always use this backend wrapper for RDS actions. Pick the one matching the host OS:
-  - macOS / Linux / WSL / Git Bash: \`${paths.posix}\`
-  - Windows (PowerShell or cmd): \`${paths.windows}\``
-    : `- Always use this backend wrapper for RDS actions: \`${paths.primary}\`.`;
-
   return `---
 name: ${skillName}
 description: Installed RDS Codex skill (${skillName})
@@ -163,7 +169,7 @@ disable-model-invocation: false
 This skill is installed by \`rds codex install\`.
 
 ## Execution contract
-${wrapperGuidance}
+${wrapperGuidance(paths)}
 - RDS support files are installed at: \`${supportRoot}\`.
 - Delegate to the canonical RDS skill source under \`${supportRoot}/skills/${skillName}/SKILL.md\` when the model can read local files.
 - If local file access is restricted, run backend commands directly with the wrapper.
